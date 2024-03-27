@@ -2,8 +2,7 @@ a = 2
 b = 6
 c = 1
 
-
-# 내가 푼 방법 : set()과 조건문
+# 내가 푼 방법 : set()과 len(), 조건문
 def solution(a, b, c) :
     dice_number_count = len(set([a, b, c]))
 
