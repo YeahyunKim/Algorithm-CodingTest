@@ -1,5 +1,10 @@
-num_list = [5, 2, 1, 7, 5]
-n = 2
+name = ["may", "kein", "kain", "radi"]
 
+t = "3141592"
+p = "127"
+answer = 0
 
-print(num_list[1:])
+for i in range((len(t) - len(p) + 1)) :
+    if int(t[i:len(p)+i]) <= int(p) :
+        answer += 1
+
