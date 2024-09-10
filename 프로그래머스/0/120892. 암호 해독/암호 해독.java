@@ -1,9 +1,10 @@
 class Solution {
-    public String solution(String cipher, int code) {
+    public String solution (String cipher, int code) {
         String answer = "";
-        for(int i= 0; i < cipher.length() / code; i++) {
-            answer += cipher.charAt(((i+1) * code - 1 ));
+        for (int i=code-1; i<cipher. length(); i+=code) {
+            answer+=cipher.charAt(i);
         }
+
         return answer;
     }
 }
