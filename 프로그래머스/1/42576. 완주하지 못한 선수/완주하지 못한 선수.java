@@ -35,7 +35,6 @@ class Solution {
         for(String s : hashMap.keySet()) {
             if(hashMap.get(s) > 0) {
                 answer = s;
-                break;
             }
         }
         
