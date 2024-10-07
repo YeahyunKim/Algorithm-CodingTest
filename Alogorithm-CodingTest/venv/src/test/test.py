@@ -1,10 +1,16 @@
-name = ["may", "kein", "kain", "radi"]
 
-t = "3141592"
-p = "127"
+n = 10
 answer = 0
 
-for i in range((len(t) - len(p) + 1)) :
-    if int(t[i:len(p)+i]) <= int(p) :
+
+for i in range(1, n+1) :
+    count = 0
+
+    for j in range(1, i+1) :
+        if i % j == 0 :
+            count += 1
+
+    if count == 3 :
         answer += 1
 
+print(answer)
