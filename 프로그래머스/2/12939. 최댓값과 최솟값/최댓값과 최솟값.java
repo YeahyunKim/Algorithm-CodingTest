@@ -3,31 +3,26 @@ import java.util.*;
 class Solution {
     public String solution(String s) {
         String answer = "";
-        String[] splitStr = s.split(" ");
-        int[] intArr = new int[splitStr.length];
+        String[] sArr = {};
+        sArr = s.split(" ");
         
+        int bigTemp = Integer.parseInt(sArr[0]);
+        int smallTemp = Integer.parseInt(sArr[0]);
         
-        for(int i = 0; i < splitStr.length; i++) {
-            intArr[i] = Integer.parseInt(splitStr[i]);        
-        }
+        System.out.println(Arrays.toString(sArr));
         
-        int sTemp = intArr[0];
-        int bTemp = intArr[0];
-        
-        for(int i = 1; i < intArr.length; i++) {
-            
-            if (sTemp > intArr[i]) {
-                sTemp = intArr[i];
+        for(int i = 0; i < sArr.length; i++) {
+            if(Integer.parseInt(sArr[i]) > bigTemp) {
+                bigTemp = Integer.parseInt(sArr[i]);
             }
             
-            if (bTemp < intArr[i]) {
-                bTemp = intArr[i];
+            if(Integer.parseInt(sArr[i]) < smallTemp) {
+                smallTemp = Integer.parseInt(sArr[i]);
             }
+            
+            
         }
-        
-        answer += String.valueOf(sTemp);
-        answer += " ";
-        answer += String.valueOf(bTemp);
+        answer += smallTemp + " " + bigTemp;
         return answer;
     }
 }
