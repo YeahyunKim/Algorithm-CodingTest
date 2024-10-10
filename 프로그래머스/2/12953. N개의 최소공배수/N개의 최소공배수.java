@@ -3,13 +3,7 @@ import java.util.*;
 class Solution {
     public int solution(int[] arr) {
         int answer = 0;
-        ArrayList<Integer> arrList = new ArrayList<>();
         Stack<Integer> stack = new Stack<>();
-        
-        
-        for(int i : arr) {
-            arrList.add(i);
-        }
         
         for(int i : arr) {
             if(stack.isEmpty()) {
@@ -21,8 +15,8 @@ class Solution {
                 stack.push(num);
             }
         }
-        answer = stack.peek();
-        return answer;
+        
+        return stack.peek();
         
     }
     
@@ -35,4 +29,5 @@ class Solution {
         return gcd(b, (a % b));
     }
 }
+
 
