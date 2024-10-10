@@ -8,8 +8,11 @@ class Solution {
             bArr[i] = B[i];
         }
         
+        
         Arrays.sort(A);
         Arrays.sort(bArr, Collections.reverseOrder());
+        
+        System.out.println(Arrays.toString(bArr));
         
         for(int i = 0; i < A.length; i++) {
             answer += A[i] * bArr[i];
