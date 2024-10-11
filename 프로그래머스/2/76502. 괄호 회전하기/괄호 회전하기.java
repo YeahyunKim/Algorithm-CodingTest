@@ -6,6 +6,7 @@ class Solution {
         
         Queue<Character> circularQ = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
+        
         int xLength = s.length();
         
             
@@ -37,6 +38,7 @@ class Solution {
             }
             
             
+            
             for(char c : s.toCharArray()) { 
                 circularQ.offer(c);
             }
@@ -46,11 +48,12 @@ class Solution {
 
             
             s = ""; 
+
             
             for(int i = 0; i < xLength; i++) {
                 s += circularQ.poll();
             }
-            
+
             stack.clear();
 
             x++;
