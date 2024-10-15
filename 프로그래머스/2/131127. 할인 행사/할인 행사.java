@@ -4,7 +4,9 @@ class Solution {
     public int solution(String[] want, int[] number, String[] discount) {
         int answer = 0;
         int membershipCount = discount.length - 10;
+        
         HashMap<String, Integer> hashMap = new HashMap<>();
+        
         boolean isPossibleGetWant = false;
         
         
