@@ -2,19 +2,19 @@ import java.util.*;
 
 class Solution {
     public String[] solution(String[] strings, int n) {
-        String[] answer = {};
-        ArrayList<String> arr = new ArrayList<>();
+        String[] answer = new String[strings.length];
+        
         
         for(int i = 0; i < strings.length; i++) {
-            arr.add(strings[i].charAt(n) + "" + strings[i]);
+            strings[i] = strings[i].charAt(n) + strings[i];
         }
         
-        Collections.sort(arr);
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(strings));
         
-        answer = new String[arr.size()];
+        Collections.sort(arrayList);
         
-        for(int i = 0; i < arr.size(); i++) {
-            answer[i] = arr.get(i).substring(1, arr.get(i).length());
+        for(int i = 0; i < arrayList.size(); i++) {
+            answer[i] = arrayList.get(i).substring(1);
         }
 
         return answer;
