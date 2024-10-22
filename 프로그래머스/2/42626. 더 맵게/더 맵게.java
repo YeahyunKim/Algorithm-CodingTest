@@ -29,6 +29,6 @@ class Solution {
         return -1;
     }
     public static int getScoville(int a, int b) {
-        return (int) (a + (b * 2));
+        return (a + (b * 2));
     }
 }
