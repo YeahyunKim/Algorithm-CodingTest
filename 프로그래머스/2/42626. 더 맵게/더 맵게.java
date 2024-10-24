@@ -6,29 +6,27 @@ import java.util.*;
 class Solution {
     public int solution(int[] scoville, int K) {
         int answer = 0;
-        int scovilleScore = 0;
-        
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-        
-        for(int i = 0; i < scoville.length; i++) {
-            minHeap.add(scoville[i]);
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        for(int num : scoville) {
+            heap.add(num);   
         }
-
-        while(!minHeap.isEmpty()) {
-            if(minHeap.peek() >= K) {
-                return answer;
+        
+        for(int i = 0; i < scoville.length - 1; i++) {
+            if (heap.peek() < K) {
+                heap.add(mixScoville(heap.poll(), heap.poll()));
+                answer++;
+            } else {
+                break;
             }
-            if(minHeap.size() <= 1) return -1;
-            
-            scovilleScore = getScoville(minHeap.poll(), minHeap.poll());
-            minHeap.add(scovilleScore);    
-            answer++;
-
+        }
+        if (heap.peek() < K) {
+            answer = -1;
         }
         
-        return -1;
+        return answer;
     }
-    public static int getScoville(int a, int b) {
-        return (a + (b * 2));
+    public static int mixScoville(int a, int b) {
+        return (a + b * 2);
     }
+
 }
