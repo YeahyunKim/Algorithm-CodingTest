@@ -6,17 +6,18 @@ class Solution {
         
         for(char c : s.toCharArray()) {
             if(stack.isEmpty()) {
-                stack.push(c);
+               stack.push(c);
             } else {
-                if (stack.peek() == c) {
-                    stack.push(c);
-                    stack.pop();
+                if(stack.peek() == c) {
                     stack.pop();
                 } else {
                     stack.push(c);
                 }
             }
+            
         }
+        
+        
         return stack.isEmpty() ? 1 : 0;
     }
 }
