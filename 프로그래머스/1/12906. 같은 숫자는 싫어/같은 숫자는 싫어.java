@@ -2,25 +2,24 @@ import java.util.*;
 
 public class Solution {
     public int[] solution(int []arr) {
-        ArrayList<Integer> result = new ArrayList<>();
+        Stack<Integer> stack = new Stack<>();
         
-              // 첫 번째 원소는 항상 추가
-        if (arr.length > 0) {
-            result.add(arr[0]);
-        }
-
-        // 배열을 순회하며 연속적인 숫자 제거
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] != arr[i - 1]) {
-                result.add(arr[i]);
+        for(int num : arr) {
+            if(stack.isEmpty()) {
+                stack.push(num);
+            } else {
+                
+                if(stack.peek() != num) stack.push(num);
+                
             }
         }
-
-        // ArrayList를 int[]로 변환
-        int[] answer = new int[result.size()];
-        for (int i = 0; i < result.size(); i++) {
-            answer[i] = result.get(i);
+        
+        int[] answer = new int[stack.size()];
+        
+        for(int i = stack.size() - 1; i >= 0; i--) {
+            answer[i] = stack.pop();
         }
+        
 
         return answer;
     }
