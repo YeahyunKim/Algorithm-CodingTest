@@ -1,28 +1,27 @@
 import java.util.*;
-
 class Solution {
     public int[] solution(String[] genres, int[] plays) {
-        HashMap<String, Integer> hashMap1 = new HashMap<>();
-        HashMap<String, HashMap<Integer, Integer>> map = new HashMap<>();
-        
+        HashMap<String, Integer> rankMap = new HashMap<>();
+        HashMap<String, HashMap<Integer, Integer>> hashMap = new HashMap<>();
         ArrayList<Integer> answerList = new ArrayList<>();
         
-        for(int i = 0; i < genres.length; i++) {    
-            hashMap1.put(genres[i], hashMap1.getOrDefault(genres[i], 0) + plays[i]);
-            HashMap<Integer, Integer> innerMap = map.getOrDefault(genres[i], new HashMap<>());
+        for(int i = 0; i < plays.length; i++) {
+            rankMap.put(genres[i], rankMap.getOrDefault(genres[i], 0) + plays[i]);
+            HashMap<Integer, Integer> innerMap = hashMap.getOrDefault(genres[i], new HashMap<>());
             innerMap.put(i, plays[i]);
             
-            map.put(genres[i], innerMap);
+            hashMap.put(genres[i], innerMap);
         }
         
-        ArrayList<String> arrayList = new ArrayList<>(hashMap1.keySet());
+        ArrayList<String> arrayList = new ArrayList<>(hashMap.keySet());
         
-        Collections.sort(arrayList, (o1, o2) -> Integer.compare(hashMap1.get(o2), hashMap1.get(o1)));
+        Collections.sort(arrayList, (o1, o2) -> Integer.compare(rankMap.get(o2), rankMap.get(o1)));
         
         for(String s : arrayList) {
-            ArrayList<Integer> rank = new ArrayList<>(map.get(s).keySet());
+            ArrayList<Integer> rank = new ArrayList<>(hashMap.get(s).keySet());
+            Collections.sort(rank, (o1, o2) -> Integer.compare(hashMap.get(s).get(o2), hashMap.get(s).get(o1)));
             
-            Collections.sort(rank, (o1, o2) -> Integer.compare(map.get(s).get(o2), map.get(s).get(o1)));
+            // System.out.println(rank);
             
             if(rank.size() >= 2) {
                 answerList.add(rank.get(0));
@@ -30,7 +29,13 @@ class Solution {
             } else {
                 answerList.add(rank.get(0));
             }
+            
         }
+        
+        
+        
+        
+        
         
         int[] answer = new int[answerList.size()];
         
