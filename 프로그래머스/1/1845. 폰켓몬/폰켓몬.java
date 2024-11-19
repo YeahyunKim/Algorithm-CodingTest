@@ -5,13 +5,9 @@ class Solution {
         
         for(int num : nums) {
             hashMap.put(num, hashMap.getOrDefault(num, 0) + 1);
+            
         }
         
-        if(hashMap.size() > nums.length / 2) {
-            return nums.length / 2;
-        } else {
-            return hashMap.size();
-        }
-        
+        return Math.min(hashMap.size(), nums.length / 2);
     }
 }
