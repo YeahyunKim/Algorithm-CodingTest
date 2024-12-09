@@ -57,10 +57,6 @@ public class Main {
         }
 
         for(int i = 1; i <= N; i++) {
-            Collections.sort(graph[i]);
-        }
-
-        for(int i = 1; i <= N; i++) {
             visited = new boolean[N+1];
 
             if(!visited[i]) {
