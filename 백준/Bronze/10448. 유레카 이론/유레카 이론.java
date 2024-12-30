@@ -23,7 +23,9 @@ public class Main {
     public static int isRactangle(int a) {
         for(int i = 0; i < 45; i++) {
             for(int j = 0; j < 45; j++) {
+                
                 for(int k = 0; k < 45; k++) {
+                    
                     if(list[i] + list[j] + list[k] == a) return 1;
                 }
             }
