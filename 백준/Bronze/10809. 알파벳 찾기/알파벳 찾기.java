@@ -1,16 +1,25 @@
-import java.util.Scanner;
-import java.util.Arrays;
+import java.util.*;
 
 public class Main{
     public static void main(String[] args) {
+        String alphabets = "abcdefghijklmnopqrstuvwxyz";
         Scanner input = new Scanner(System.in);
-        String S = input.nextLine();
-        char[] alphabets = new char[26];
-        for(int i = 0; i < 26; i++) {
-            if(i != 25) {
-                System.out.print(S.indexOf((char)(i+97)) + " ");   
+        String s = input.nextLine();
+        
+        for(int i = 0; i < alphabets.length(); i++) {
+            if(s.contains(String.valueOf(alphabets.charAt(i)))) {
+                if (i == alphabets.length() - 1) {
+                    System.out.print(s.indexOf(String.valueOf(alphabets.charAt(i))) + "");
+                } else {
+                    System.out.print(s.indexOf(String.valueOf(alphabets.charAt(i))) + " ");
+                }
+
             } else {
-                System.out.print(S.indexOf((char)(i+97)));
+                if (i == alphabets.length() - 1) {
+                    System.out.print(-1 + "");
+                } else {
+                    System.out.print(-1 + " ");
+                }
             }
         }
     }
