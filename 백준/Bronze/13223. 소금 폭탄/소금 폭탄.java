@@ -1,28 +1,44 @@
 import java.util.Scanner;
 
-class Main {
+public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String current = sc.next();
-        String drop = sc.next();
+        Scanner input = new Scanner(System.in);
 
-        int currentHour = (current.charAt(0) + '0') * 10 + current.charAt(1) + '0';
-        int currentMinute = (current.charAt(3) + '0') * 10 + current.charAt(4) + '0';
-        int currentSecond = (current.charAt(6) + '0') * 10 + current.charAt(7) + '0';
-        int currentSecondAmount = currentHour * 3600 + currentMinute * 60 + currentSecond;
+        String[] now = input.next().split(":");
+        String[] later = input.next().split(":");
+        StringBuilder sb = new StringBuilder();
+        int convertNow = 0;
+        int convertLater = 0;
 
-        int dropHour = (drop.charAt(0) + '0') * 10 + drop.charAt(1) + '0';
-        int dropMinute = (drop.charAt(3) + '0') * 10 + drop.charAt(4) + '0';
-        int dropSecond = (drop.charAt(6) + '0') * 10 + drop.charAt(7) + '0';
-        int dropSecondAmount = dropHour * 3600 + dropMinute * 60 + dropSecond;
+        for(int i = 0; i < now.length; i++) {
 
-        int needSecondAmount = dropSecondAmount - currentSecondAmount;
-        if (needSecondAmount <= 0)
-            needSecondAmount += 24 * 3600;
-        int needHour = needSecondAmount / 3600;
-        int needMinute = (needSecondAmount % 3600) / 60;
-        int needSecond = needSecondAmount % 60;
+            if(i == 0) {
+                convertNow += Integer.parseInt(now[i]) * 60 * 60;
+                convertLater += Integer.parseInt(later[i]) * 60 * 60;
+            }
 
-        System.out.printf("%02d:%02d:%02d", needHour, needMinute, needSecond);
+            if(i == 1) {
+                convertNow += Integer.parseInt(now[i]) * 60;
+                convertLater += Integer.parseInt(later[i]) * 60;
+            }
+
+            if(i == 2) {
+                convertNow += Integer.parseInt(now[i]);
+                convertLater += Integer.parseInt(later[i]);
+            }
+        }
+
+        int convertTime = convertLater - convertNow;
+        
+        if(convertTime <= 0) {
+            convertTime += 24 * 60 * 60;
+        }
+
+        int hour = convertTime / 3600;
+        int minutes = (convertTime % 3600) / 60;
+        int seconds = convertTime % 60;
+        
+        System.out.printf("%02d:%02d:%02d",hour,minutes,seconds);
+
     }
 }
