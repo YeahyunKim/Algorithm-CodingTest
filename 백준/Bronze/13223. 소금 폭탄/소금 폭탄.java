@@ -28,11 +28,11 @@ public class Main {
             }
         }
 
-        int convertTime = convertLater - convertNow;
-        
-        if(convertTime <= 0) {
-            convertTime += 24 * 60 * 60;
+        if(convertNow >= convertLater) {
+            convertLater += 24 * 60 * 60;
         }
+
+        int convertTime = convertLater - convertNow;
 
         int hour = convertTime / 3600;
         int minutes = (convertTime % 3600) / 60;
