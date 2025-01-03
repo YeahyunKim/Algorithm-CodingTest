@@ -1,25 +1,32 @@
 package org.SORT;
 
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class 회사에있는사람_7785 {
     public static void main(String[] args) {
-
-        String[] s = {"t", "s"};
         Scanner input = new Scanner(System.in);
+        HashMap<String, Integer> hashMap = new HashMap<>();
 
         int N = input.nextInt();
-
-        HashMap<String, String> hashMap = new HashMap<>();
+        input.nextLine();
 
         for(int i = 0; i < N; i++) {
-            hashMap.put("t", hashMap.getOrDefault("t", "s") +1);
+            String[] s = input.nextLine().split(" ");
 
-
-
+            if(s[1].equals("enter")) {
+                hashMap.put(s[0], hashMap.getOrDefault(s[0], 0) + 1);
+            } else {
+                hashMap.remove(s[0]);
+            }
         }
-//        hashMap.put(input.next(), hashMap.getOrDefault())
+
+        ArrayList<String> arrayList = new ArrayList<>(hashMap.keySet());
+
+        Collections.sort(arrayList, Collections.reverseOrder());
+
+        for(String s : arrayList) {
+            System.out.println(s);
+        }
 
     }
 }
