@@ -28,9 +28,14 @@ public class Main {
         for(int i = 1; i <= N; i++) {
             groundPrefix[i] = groundPrefix[i-1] + groundPrefix[i];
         }
+        
+        StringBuilder sb = new StringBuilder();
+        
         for(int i = 1; i <= N; i++) {
             ground[i] += groundPrefix[i];
-            System.out.print(ground[i] + " ");
+            sb.append(ground[i] + " ");
         }
+
+        System.out.println(sb);
     }
 }
