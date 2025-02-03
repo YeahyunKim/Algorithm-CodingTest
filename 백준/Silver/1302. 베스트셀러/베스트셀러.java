@@ -3,14 +3,15 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        
+        int a = input.nextInt();
+        input.nextLine();
+        
         HashMap<String, Integer> hashMap = new HashMap<>();
         ArrayList<String> arrayList = new ArrayList<>();
         
-        int N = input.nextInt();
-        
-        for(int i = 0; i < N; i++) {
-            String s = input.next();
-            
+        for(int i = 0; i < a; i++) {
+            String s = input.nextLine();
             hashMap.put(s, hashMap.getOrDefault(s, 0) + 1);
         }
         
@@ -28,12 +29,13 @@ public class Main {
                 arrayList.add(entry.getKey());
             }
         }
-        
+
         if(arrayList.size() > 1) {
             Collections.sort(arrayList);
             System.out.println(arrayList.get(0));
         } else {
             System.out.println(arrayList.get(0));
         }
+        
     }
 }
