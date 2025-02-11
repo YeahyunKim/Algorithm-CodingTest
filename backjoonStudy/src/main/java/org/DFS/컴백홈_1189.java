@@ -21,7 +21,7 @@ public class 컴백홈_1189 {
         if(depth > DISTANCE ) {
             return;
         }
-        
+
         for(int i = 0; i < 4; i++) {
             int newY = y + dirY[i];
             int newX = x + dirX[i];
