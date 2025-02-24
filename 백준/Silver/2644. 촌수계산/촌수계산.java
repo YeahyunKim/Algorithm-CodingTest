@@ -9,14 +9,15 @@ public class Main {
 
     public static void dfs(int idx, int end, int count) {
         visited[idx] = true;
+        count++;
         if(idx == end) {
-            depth = count;
+            depth = count-1;
             return;
         }
 
         for(int i = 0; i < graph[idx].size(); i++) {
             if(!visited[graph[idx].get(i)]) {
-                dfs(graph[idx].get(i), end, count+1);
+                dfs(graph[idx].get(i), end, count);
             }
         }
 
