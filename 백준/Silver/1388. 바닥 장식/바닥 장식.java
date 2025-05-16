@@ -1,58 +1,60 @@
 import java.util.*;
 
 public class Main {
-    static int H,W;
     static String[][] map;
+    static boolean[][] visited;
     static int[] dirY = {1};
     static int[] dirX = {1};
+    static int N, M;
 
-    public static void dfs(int y, int x, String s) {
-        map[y][x] = "#";
+    public static void dfs(int y, int x, String a) {
+        visited[y][x] = true;
 
-        int newY = y + dirY[0];
-        int newX = x + dirX[0];
-        if(newY >= 0 && newX >= 0 && newX < W) {
-            if (s.equals("-")) {
-                if (map[y][newX].equals("-")) {
-                    dfs(y, newX, map[y][newX]);
-                }
+        int newY = y + 1;
+        int newX = x + 1;
+
+        if(a.equals("-")) {
+            if(newX < M && map[y][newX].equals("-")) {
+                dfs(y, newX, map[y][newX]);
             }
         }
-        if(newY >= 0 && newX >= 0 && newY < H) {
-            if(s.equals("|")) {
-                if(map[newY][x].equals("|")) {
-                    dfs(newY, x, map[newY][x]);
-                }
+
+        if(a.equals("|")) {
+            if(newY < N && map[newY][x].equals("|")) {
+                dfs(newY, x, map[newY][x]);
             }
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         Scanner input = new Scanner(System.in);
+        int answer = 0;
 
-        H = input.nextInt();
-        W = input.nextInt();
+        N = input.nextInt();
+        M = input.nextInt();
         input.nextLine();
-        int count = 0;
 
-        map = new String[H][W];
+        map = new String[N][M];
+        visited = new boolean[N][M];
 
-        for(int i = 0; i < H; i++) {
-            String[] letters = input.nextLine().split("");
+        for(int i = 0; i < N; i++) {
+            String[] a = input.nextLine().split("");
+            for(int j = 0; j < M; j++) {
 
-            for(int j = 0; j < letters.length; j++) {
-                map[i][j] = letters[j];
+                map[i][j] = a[j];
             }
         }
 
-        for(int i = 0; i < H; i++) {
-            for(int j = 0; j < W; j++) {
-                if(!map[i][j].equals("#")) {
-                    dfs(i, j, map[i][j]);
-                    count++;
+
+        for(int y = 0; y < N; y++) {
+            for(int x = 0; x < M; x++) {
+                if(!visited[y][x]){
+                    dfs(y, x, map[y][x]);
+                    answer++;
                 }
             }
         }
-        System.out.println(count);
+
+        System.out.println(answer);
     }
 }
