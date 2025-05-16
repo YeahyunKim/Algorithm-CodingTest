@@ -40,3 +40,12 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### MAC OS ###
+*.DS_Store
+
+### properties
+/src/main/resources/properties/env.properties
+
+### test.http
+/http/test.http
