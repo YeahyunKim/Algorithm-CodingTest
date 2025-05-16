@@ -1,36 +1,30 @@
-package org.DFS;
+package org.DFS.바이러스2606;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-public class 촌수계산_2644 {
-    static int N, A, B, M;
+public class 바이러스2_2606 {
+    static int N, M;
     static ArrayList<Integer>[] graph;
     static boolean[] visited;
-    static int depth = 0;
+    static int answer = 0;
 
-    public static void dfs(int idx, int end, int count) {
+    public static void dfs(int idx) {
         visited[idx] = true;
-
-        if(idx == end) {
-            depth = count;
-            return;
-        }
+        answer++;
 
         for(int i = 0; i < graph[idx].size(); i++) {
             if(!visited[graph[idx].get(i)]) {
-                dfs(graph[idx].get(i), end, count+1);
+                dfs(graph[idx].get(i));
             }
         }
     }
 
     public static void main(String[] args) {
+
         Scanner input = new Scanner(System.in);
 
         N = input.nextInt();
-        A = input.nextInt();
-        B = input.nextInt();
         M = input.nextInt();
+
 
         graph = new ArrayList[N+1];
         visited = new boolean[N+1];
@@ -47,14 +41,9 @@ public class 촌수계산_2644 {
             graph[b].add(a);
         }
 
-        dfs(A, B, 0);
+        dfs(1);
 
-        if(A == B) {
-            System.out.println(0);
-        } else {
-            System.out.println(depth == 0 ? -1 : depth);
-        }
-
+        System.out.println(answer - 1);
 
     }
 }

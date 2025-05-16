@@ -43,6 +43,10 @@ public class 바이러스 {
             graph[y][x] = true;
         }
 
+        for(int i = 0; i < N; i++) {
+            System.out.println(Arrays.toString(graph[i]));
+        }
+
         //2. 재귀함수 호출
         dfs(1);
 
