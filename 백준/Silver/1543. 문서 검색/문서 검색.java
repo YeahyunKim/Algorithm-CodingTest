@@ -1,19 +1,36 @@
-import java.util.Scanner;
+import java.util.*;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
-        String str = input.nextLine();
-
-        String searchWord = input.nextLine();
+        
+        String a = input.nextLine();
+        String b = input. nextLine();
 
         int answer = 0;
-        while(str.contains(searchWord)) {
-            str = str.replaceFirst(searchWord, "_");
-            answer++;
+        int count = 0;
+        
+        int pointer = 0;
+        int index = 0;
+        while(a.length() - pointer >= b.length()) {
+            int charCount = 0;
+            for(int i = 0; i < b.length(); i++) {
+                if(a.charAt(pointer) == b.charAt(i)) {
+                    charCount++;
+                    pointer++;
+                }
+            }
+            
+            if(charCount == b.length()) {
+                answer++;
+                index = pointer;
+            } else {
+                index++;
+                pointer = index;
+            }
         }
-
+        
         System.out.println(answer);
+        
     }
 }
