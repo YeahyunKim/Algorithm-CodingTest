@@ -1,44 +1,42 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
-        String[] now = input.next().split(":");
-        String[] later = input.next().split(":");
-        StringBuilder sb = new StringBuilder();
-        int convertNow = 0;
-        int convertLater = 0;
-
-        for(int i = 0; i < now.length; i++) {
-
+        
+        String[] nowStr = input.next().split(":");
+        String[] reserveStr = input.next().split(":");
+        int now = 0;
+        int reserve = 0;
+        
+        for(int i = 0; i < nowStr.length; i++) {
             if(i == 0) {
-                convertNow += Integer.parseInt(now[i]) * 60 * 60;
-                convertLater += Integer.parseInt(later[i]) * 60 * 60;
+                now += Integer.parseInt(nowStr[i]) * 60 * 60;
+                reserve += Integer.parseInt(reserveStr[i]) * 60 * 60;
             }
-
+            
             if(i == 1) {
-                convertNow += Integer.parseInt(now[i]) * 60;
-                convertLater += Integer.parseInt(later[i]) * 60;
+                now += Integer.parseInt(nowStr[i]) * 60;
+                reserve += Integer.parseInt(reserveStr[i]) * 60;
             }
-
+            
             if(i == 2) {
-                convertNow += Integer.parseInt(now[i]);
-                convertLater += Integer.parseInt(later[i]);
+                now += Integer.parseInt(nowStr[i]);
+                reserve += Integer.parseInt(reserveStr[i]);
             }
         }
-
-        if(convertNow >= convertLater) {
-            convertLater += 24 * 60 * 60;
+        
+        if(now >= reserve) {
+            reserve += 24 * 60 * 60;
         }
-
-        int convertTime = convertLater - convertNow;
+        
+        int convertTime = reserve - now;
 
         int hour = convertTime / 3600;
         int minutes = (convertTime % 3600) / 60;
         int seconds = convertTime % 60;
-        
-        System.out.printf("%02d:%02d:%02d",hour,minutes,seconds);
 
+
+        System.out.printf("%02d:%02d:%02d",hour,minutes,seconds);
     }
 }
