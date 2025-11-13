@@ -5,26 +5,27 @@ public class Main {
         Scanner input = new Scanner(System.in);
         
         int N = input.nextInt();
-        
-        
-        for(int i = 0 ; i < N; i++) {
-            int count = 0;
-            int a = input.nextInt();
-            int b = input.nextInt();
-            int c = input.nextInt();
-            
-            for(int k = 1; k <= b; k++) {
-                for(int j = 1; j <= a; j++) {
-                    count++;
-                    if(count == c) {
-                        if(k <= 9  && k >= 1) {
-                            System.out.println(j + "0" + k);   
-                        } else {
-                            System.out.println(j + "" + k);   
-                        }
-                    }
-                }
+
+        for(int i = 0; i < N; i++) {
+            int H = input.nextInt();
+            int W = input.nextInt();
+            int CUSTOMER = input.nextInt();
+
+            String unit = "";
+            String number = "";
+            if(CUSTOMER % H == 0) {
+                unit = String.valueOf(H);
+                number = String.valueOf(CUSTOMER / H);
+            } else {
+                unit = String.valueOf(CUSTOMER % H);
+                number = String.valueOf((CUSTOMER / H) + 1);
             }
+            
+            
+            if(number.length() < 2) {
+                number = "0" + number;
+            }
+            System.out.println(unit+number);
         }
-    }
+    }   
 }
