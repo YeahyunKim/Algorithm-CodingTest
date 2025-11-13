@@ -6,53 +6,45 @@ public class Main {
 
         int N = input.nextInt();
 
-
         for(int i = 0; i < N; i++) {
-            int A = input.nextInt();
 
-            boolean flag = false;
+            int M = input.nextInt();
+            int answer = 0;
 
-
-            for(int j = 2; j <= 64; j++) {
-                int copyA = A;
+            for(int B = 2; B <= 64; B++) {
                 StringBuilder sb = new StringBuilder();
-                
-                while(copyA > 0) {
-                    int left = copyA % j;
-                    copyA = copyA / j;
+                int X = M;
+
+                while(X > 0) {
+                    int left = X % B;
+                    X = X / B;
 
                     if(left < 10) sb.insert(0, left);
                     else sb.insert(0, (char) ((left - 10) + 'A'));
-
-
                 }
-                
-                if(isPalindrome(sb.toString())) {
-                    flag = true;
+
+                if(palindrome(sb.toString()) == 1) {
+                    answer = 1;
                     break;
                 }
             }
-            if(flag) {
-                System.out.println(1);
-            } else {
-                System.out.println(0);
-            }
+            System.out.println(answer);
         }
     }
 
-    public static boolean isPalindrome(String s) {
-        int start = 0;
-        int end = s.length() - 1;
+    public static int palindrome(String sb) {
+        int left = 0;
+        int right = sb.length() - 1;
 
-        while(start < end) {
-            if(s.charAt(start) != s.charAt(end)) {
-                return false;
+        while(left < right) {
+            if(sb.charAt(left) == sb.charAt(right)) {
+                left++;
+                right--;
+                continue;
             } else {
-                start++;
-                end--;   
+                return 0;
             }
         }
-
-        return true;
+        return 1;
     }
 }
