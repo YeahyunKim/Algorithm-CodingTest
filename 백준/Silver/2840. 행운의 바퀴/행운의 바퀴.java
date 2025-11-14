@@ -1,62 +1,58 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
-        int N = input.nextInt(); //칸의 수
-        int M = input.nextInt(); //돌리는 횟수
-        input.nextLine();
-
-        String[] plateList = new String[N];
-        Arrays.fill(plateList, "?");
-
-        boolean flag = true;
-        int lastCallIndex = 0;
-
-        int index = 0;
-
-        for(int i = 0; i < M; i++) {
-            String[] sList = input.nextLine().split(" ");
-
-            int a = Integer.parseInt(sList[0]);
-            String s = sList[1];
-
-            index += a;
-
-
-            if (plateList[index % N].equals("?")) {
-                if(!isContain(plateList, s)) {
-                    plateList[index % N] = s;
+        int ARRAYSIZE = input.nextInt();
+        int PLAYTIME = input.nextInt();
+        
+        String[] array = new String[ARRAYSIZE];
+        
+        int now = 0;
+        boolean isEmpty = true;
+        for(int i = 0; i < PLAYTIME; i++) {
+            int rotation = input.nextInt();
+            String result = input.next();
+            
+            now += rotation;
+            
+            if(array[now % ARRAYSIZE] == null) {
+                if(!isContain(array, result)) {
+                    array[now % ARRAYSIZE] = result;   
                 } else {
-                    flag = false;
-                    break;
+                    isEmpty = false;
+                    break;                     
                 }
-            }
-            else if (!plateList[index % N].equals(s)) {
-                flag = false;
-                break;
+            } else if(!array[now % ARRAYSIZE].equals(result)) {
+                isEmpty = false;
+                break;   
             }
         }
-
-        int count = 0;
-
-        if(!flag) {
+        if(!isEmpty) {
             System.out.println("!");
         } else {
-            while(count < N) {
-                System.out.print(plateList[index % N]);
-                index--;
-                count++;
+            for(int i = now % ARRAYSIZE; i >= 0; i--) {
+                if(array[i] == null) {
+                    System.out.print("?");
+                } else {
+                    System.out.print(array[i]);
+                }
+            }
+            for(int i = ARRAYSIZE - 1; i > now % ARRAYSIZE; i--) {
+                if(array[i] == null) {
+                    System.out.print("?");
+                } else {
+                    System.out.print(array[i]);
+                }
             }
         }
+        
     }
 
     public static boolean isContain(String[] array, String s) {
         for(int i = 0; i < array.length; i++) {
-            if(array[i].equals(s)) {
-                return true;
+            if(array[i] != null && array[i].equals(s)) {
+                return true;   
             }
         }
         return false;
