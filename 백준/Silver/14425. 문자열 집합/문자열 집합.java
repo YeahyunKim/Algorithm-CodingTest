@@ -1,51 +1,33 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
-        int answer = 0;
+        
         int N = input.nextInt();
-        int M = input.nextInt();
-
-        String[] words = new String[N];
-        String[] dictionary = new String[M];
-
+        int S = input.nextInt();
+        input.nextLine();
+        
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        
+        String[] array = new String[N];
+        
         for(int i = 0; i < N; i++) {
-            words[i] = input.next();
+            array[i] = input.nextLine();
         }
-
-        for(int i = 0; i < M; i++) {
-            dictionary[i] = input.next();
+        
+        for(int i = 0; i < S; i++) {
+            String s = input.nextLine();
+            hashMap.put(s, hashMap.getOrDefault(s, 0) + 1);
         }
-
-        Arrays.sort(words);
-
-        for(int i = 0; i < M; i++) {
-            if(binarySearch(dictionary[i], words)) {
-                answer++;
+        int answer = 0;
+        
+        for(String s : array) {
+            if(hashMap.containsKey(s)) {
+                answer += hashMap.get(s);   
             }
         }
-
-        System.out.println(answer);
-    }
-    public static boolean binarySearch(String word, String[] dictionaryList) {
-        int start = 0;
-        int end = dictionaryList.length -1;
-
-        while(start <= end) {
-            int mid = start + (end - start) / 2;
-
-            if(word.compareTo(dictionaryList[mid]) == 0) {
-                return true;
-            }
-            else if(word.compareTo(dictionaryList[mid]) > 0) {
-                start = mid + 1;
-            } else {
-                end = mid - 1;
-            }
-        }
-        return false;
-    }
+        
+        System.out.print(answer);
+    }   
 }
