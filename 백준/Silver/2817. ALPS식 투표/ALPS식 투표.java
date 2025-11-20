@@ -1,72 +1,65 @@
 import java.util.*;
 
 public class Main {
-    public static class Score {
-        int staffIndex;
-        double score;
-
-        public Score(int staffIndex, double score) {
-            this.staffIndex = staffIndex;
-            this.score = score;
-        }
-    }
-
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+                Scanner input = new Scanner(System.in);
 
-        int X = input.nextInt();  //참가자수
-        int N = input.nextInt(); //매니저수
+        int VOTECOUNT = input.nextInt();
+        double CUTLINE = VOTECOUNT * 0.05;
 
-        double validCut = X * 0.05;
+        ArrayList<ArrayList<Double>> arrayList = new ArrayList<>();
 
-        boolean[] validCandidate = new boolean[26];
-        int[] staffVoted = new int[26];
-        int candidateCount = 0;
 
+        int N = input.nextInt();
+
+
+        int size = 0;
         for(int i = 0; i < N; i++) {
-            String name = input.next();
-            int vote = input.nextInt();
+            String staffStr = input.next();
 
-            if(vote >= validCut) {
-                int index = name.charAt(0) - 'A';
-                validCandidate[index] = true;
-                staffVoted[index] = vote;
-                candidateCount++;
+            double staff = staffStr.charAt(0);
+            double vote = input.nextInt();
+
+            if(vote >= CUTLINE) {
+                arrayList.add(new ArrayList<>());
+                arrayList.get(size).add(staff);
+                arrayList.get(size).add(vote);
+                size++;
             }
         }
 
-        Score[] scores = new Score[candidateCount * 14];
+        Map<Character, Integer> map = new TreeMap<>();
+        
+        ArrayList<ArrayList<Double>> copyList = new ArrayList<>();
 
-        int scoreIndex = 0;
-
-        for(int i = 0; i < staffVoted.length; i++) {
-            if(staffVoted[i] != 0) {
-                for(int j = 1; j <= 14; j++) {
-                    scores[scoreIndex++] = new Score(i, (double)staffVoted[i] / j);
-                }
+        for(int i = 0; i < arrayList.size(); i++) {
+            for(int j = 1; j <= 14; j++) {
+                int index = i * 14 + (j - 1);
+                copyList.add(new ArrayList<>());
+                copyList.get(index).add(arrayList.get(i).get(0));
+                copyList.get(index).add(arrayList.get(i).get(1) / j);
             }
+            char a = (char)(arrayList.get(i).get(0).doubleValue());
+            map.put(a, 0);
         }
-        Arrays.sort(scores, new Comparator<Score>() {
+
+        Collections.sort(copyList, new Comparator<ArrayList<Double>> () {
             @Override
-            public int compare(Score o1, Score o2) {
-                return (int) (o2.score - o1.score);
+            public int compare(ArrayList<Double> o1, ArrayList<Double> o2) {
+                return Double.compare(o2.get(1), o1.get(1));
             }
 
         });
-        int[] answer = new int[26];
+
 
         for(int i = 0; i < 14; i++) {
-            answer[scores[i].staffIndex]++;
+            char a = (char)(copyList.get(i).get(0).doubleValue());
+                map.put(a, map.getOrDefault(a, 0) + 1);
         }
 
-        for(int i = 0; i < validCandidate.length; i++) {
-            if(validCandidate[i]) {
-                System.out.println((char) (i + 'A') + " " + answer[i]);
-            }
+        for(Map.Entry<Character, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
         }
-
-//        for(int i = 0; i < scores.length; i++) {
-//            System.out.println(scores[i].staffIndex + " : " + scores[i].score);
-//        }
-    }
+        
+    }   
 }
