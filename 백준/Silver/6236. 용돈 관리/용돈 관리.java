@@ -1,58 +1,55 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-    static int N, M;
-    static int[] DAILY_MONEY;
-    static int max = 0;
+ static int N, WITHDRAW_COUNTS;
+    static int[] array;
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
         N = input.nextInt();
-        M = input.nextInt();
+        WITHDRAW_COUNTS = input.nextInt();
 
-        DAILY_MONEY = new int[N];
+        array = new int[N];
 
         for(int i = 0; i < N; i++) {
-            int a = input.nextInt();
-            max = Math.max(max, a);
-            DAILY_MONEY[i] = a;
+            array[i] = input.nextInt();
         }
-        System.out.println(getLeastMoney());
 
 
-    }
-    static int getLeastMoney() {
-        int l = max;
+        int l = 1;
         int r = 1000000000;
-
-        int answer = -1;
-
+        int answer = 0;
         while(l <= r) {
-            int money = (l + r) / 2;
-            if(isPossible(money)) {
-                r = money -1;
-                answer = money;
+            int amount = (l + r) / 2;
+
+            if(isCorrectCount(amount)) {
+                r = amount -1;
+                answer = amount;
             } else {
-                l = money + 1;
+                l = amount + 1;
             }
         }
 
-        return answer;
+        System.out.println(answer);
     }
 
-    static boolean isPossible(int drawAmount) {
+    public static boolean isCorrectCount(int amount) {
         int count = 1;
-        int leftMoney = drawAmount;
-        for(int dailyMoney : DAILY_MONEY) {
-            if(dailyMoney > drawAmount) return false;
-            if(leftMoney < dailyMoney) {
-                if(count == M) return false;
+        int total = 0;
+
+        for(int i = 0; i < N; i++) {
+            if(array[i] > amount) return false;
+            if(total + array[i] <= amount) {
+                total += array[i];
+            } else {
+                total = 0;
+                total += array[i];
+                if(count == WITHDRAW_COUNTS) return false;
                 count++;
-                leftMoney = drawAmount;
             }
-            leftMoney -= dailyMoney;
         }
+
         return true;
+
     }
 }
