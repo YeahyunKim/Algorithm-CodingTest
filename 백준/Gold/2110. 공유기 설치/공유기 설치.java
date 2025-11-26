@@ -1,54 +1,58 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     static int N, M;
-    static int[] HOUSE_LOCATION;
+    static int[] array;
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
+        
         N = input.nextInt();
         M = input.nextInt();
-
-        HOUSE_LOCATION = new int[N];
-
+        
+        array = new int[N];
+        
         for(int i = 0; i < N; i++) {
-            HOUSE_LOCATION[i] = input.nextInt();
+            array[i] = input.nextInt();
         }
-
-        Arrays.sort(HOUSE_LOCATION);
+        
+        Arrays.sort(array);
+        
         System.out.println(getDistance());
-
+        
     }
-    static int getDistance() {
+    
+    
+    public static int getDistance() {
         int l = 1;
-        int r = HOUSE_LOCATION[HOUSE_LOCATION.length-1] - HOUSE_LOCATION[0];
+        int r = array[array.length - 1] - array[0];
         int answer = 0;
 
         while(l <= r) {
             int distance = (l + r) / 2;
-
-            if(getCount(distance) >= M) {
-                l = distance + 1;
+            
+            if(isPossible(distance)) {
                 answer = distance;
+                l = distance + 1;
             } else {
                 r = distance - 1;
             }
-
         }
-
         return answer;
     }
-    static int getCount(int distance2) {
-        int temp = HOUSE_LOCATION[0];
+    
+    public static boolean isPossible(int distance) {
+        // M = count 설치해야 하는 공유기 개수인걸 잊으면 안됨
+        // 즉, count >= M true else false
+        
+        int firstHouseLocation = array[0];
         int count = 1;
-
-        for(int i = 1; i < HOUSE_LOCATION.length; i++) {
-            if(HOUSE_LOCATION[i] - temp >= distance2) {
-                temp = HOUSE_LOCATION[i];
+        
+        for(int i = 1; i < array.length; i++) {
+            if(array[i] - firstHouseLocation >= distance) {
+                firstHouseLocation = array[i];
                 count++;
             }
         }
-        return count;
+        return count >= M;
     }
 }
