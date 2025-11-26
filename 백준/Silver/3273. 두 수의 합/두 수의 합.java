@@ -5,35 +5,37 @@ public class Main {
         Scanner input = new Scanner(System.in);
         
         int N = input.nextInt();
-
         int[] array = new int[N];
-
+        
         for(int i = 0; i < N; i++) {
             array[i] = input.nextInt();
         }
         
         Arrays.sort(array);
         
-        int X = input.nextInt();
+        int M = input.nextInt();
         
-        int left = 0;
-        int right = N - 1;
-        int answer = 0;
-
-        while(left < right) {
-            int sum = array[left] + array[right];
-            if(sum == X) {
-                left++;
-                right--;
-                answer++;
-            } else if(sum < X) {
-                left++;
-            } else if(sum > X) {
-                right--;
+        
+        int i = 0;
+        int j = array.length-1;
+        int count = 0;
+        while(i < j) {
+            int sum = array[i] + array[j];
+            if(sum == M) {
+                count++;
+                i++;
+                j--;
+                continue;
+            }
+            
+            if(sum > M) {
+                j--;
+            } else {
+                i++;
             }
         }
         
-        System.out.println(answer);
+        System.out.print(count);
         
     }
 }
