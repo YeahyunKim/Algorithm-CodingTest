@@ -4,20 +4,18 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         
-        int num = input.nextInt();
-        int B = input.nextInt();
+        int N = input.nextInt();
+        int M = input.nextInt();
         
         StringBuilder sb = new StringBuilder();
         
-        while(num > 0) {
-            int left = num % B;
-            num = num / B;
-            
-            if(left < 10) sb.insert(0, left);
-            else sb.insert(0, (char) ((left - 10) + 'A'));
+        while(N > 0) {
+            int left = N % M;
+            N = N / M;
+            if(left >= 10) sb.insert(0, (char) ('A' + (left - 10)));
+            else sb.insert(0, String.valueOf(left));
         }
         
-        System.out.println(sb.toString());
-        
+        System.out.print(sb);
     }
 }
