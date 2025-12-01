@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         
@@ -15,29 +15,12 @@ public class Main {
         
         Arrays.sort(array);
         
+        
         int i = 0;
         int j = 0;
+
         int answer = Integer.MAX_VALUE;
-        
-        // 1 2 3 4 5
-        // 차이가 3 이상일 때,
-        // (1, 4) , (1, 5) 정답은 3;
-        
-        // i = 0   [1] 2 3 4 5
-        // j = 1    1 [2] 3 4 5
-        // 차이가 < 3 ==> j++
-        
-        // i = 0   [1] 2 3 4 5
-        // j = 2    1 2 [3] 4 5
-        // 차이가 < 3 ==> j++
-        
-        // i = 0   [1] 2 3 4 5
-        // j = 3    1 2 3 [4] 5
-        // 차이가 <= 3 ==> 정답
-        
-        
-        // 1 5 10 11 12
-        
+
         while(i < N && j < N) {
             if(array[j] - array[i] >= M && answer > array[j] - array[i]) answer = array[j] - array[i];
             
@@ -49,6 +32,5 @@ public class Main {
         }
         
         System.out.print(answer);
-       
     }
 }
